@@ -1,0 +1,31 @@
+.mainExpenseContainer {
+  min-height: 100vh;
+  background-color: var(--bgColor);
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+.subContainerOne > h1:first-child {
+  font-weight: 700;
+  font-style: normal;
+}
+.subContainerOne {
+  font-family: "Ubuntu", sans-serif;
+  padding: 12px 20px;
+}
+.subOneWrapper {
+  background-color: #626262;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.balanceContainer {
+  background-color: #9b9b9b;
+  color: white;
+  font-weight: 400;
+  width: max-content;
+}
+.expenseContainer {
+  background-color: #9b9b9b;
+}
+.subContainerTwo {
+}
