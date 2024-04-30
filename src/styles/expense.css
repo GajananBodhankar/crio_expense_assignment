@@ -16,16 +16,61 @@
 .subOneWrapper {
   background-color: #626262;
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 30px 50px;
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
 }
 .balanceContainer {
   background-color: #9b9b9b;
   color: white;
-  font-weight: 400;
+  font-weight: 300;
+  font-size: 30px;
+  border-radius: 10px;
+  display: flex !important;
+  flex-direction: column;
+  padding: 35px 30px;
+  gap: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0px 2px 4px 0px black;
+}
+.balanceContainer > button {
+  background-image: linear-gradient(to right, #b5dc52, #89e148);
+  color: white;
+  border: none;
+  border-radius: 12px;
   width: max-content;
+  align-self: center;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 7px 20px;
 }
 .expenseContainer {
   background-color: #9b9b9b;
+  color: white;
+  font-weight: 300;
+  font-size: 30px;
+  border-radius: 10px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  padding: 35px 30px;
+  gap: 10px;
+  width: 300px;
+  box-shadow: 0px 2px 4px 0px black;
+}
+.expenseContainer > button {
+  background-image: linear-gradient(to right, #ff9595, #ff4747, #ff3838);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  width: max-content;
+  align-self: center;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 7px 20px;
 }
 .subContainerTwo {
 }
