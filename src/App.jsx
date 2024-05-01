@@ -1,8 +1,13 @@
 import React from "react";
 import Expense from "./Components/Expense";
-import './App.css'
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import "./App.css";
 function App() {
-  return <Expense />;
+  return (
+    <SnackbarProvider>
+      <Expense />
+    </SnackbarProvider>
+  );
 }
 
 export default App;
