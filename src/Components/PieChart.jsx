@@ -51,7 +51,7 @@ function PieChartComponent({ state }) {
     );
   };
   useEffect(() => {
-    console.log("pie", state, data);
+    // console.log("pie", state, data);
   });
   return (
     <PieChart width={170} height={180}>
