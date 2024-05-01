@@ -108,16 +108,31 @@ function handleGetLocalStorage(setExpense, setBalance, balance, dispatch) {
             }
         });
         setExpense(result);
-        if (localStorage.getItem('balance')) {
-            setBalance(localStorage.getItem('balance') - result);
-        } else {
+        if (!localStorage.getItem('balance')) {
             setBalance(balance - result)
+        } else {
+            setBalance(localStorage.getItem('balance'))
         }
     }
 }
+
+function handleAddBalance(balance, value, setBalance, enqueueSnackbar, setIsOpen) {
+    if (!parseInt(value)) {
+        enqueueSnackbar("Please enter amount in numeric form", {
+            autoHideDuration: 2000,
+            variant: "error",
+        })
+    } else {
+        setBalance(balance + parseInt(value))
+        localStorage.setItem('balance', balance + parseInt(value))
+        setIsOpen(prev => !prev)
+    }
+}
+
 export {
     initialState,
     reducerFunction,
     addExpense,
-    handleGetLocalStorage
+    handleGetLocalStorage,
+    handleAddBalance
 }

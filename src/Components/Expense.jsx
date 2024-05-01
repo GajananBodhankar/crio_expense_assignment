@@ -70,7 +70,12 @@ function Expense({
 
       <div className="subContainerTwo"></div>
       <CustomModel isOpen={isOpen} setIsOpen={setIsOpen} />
-      <BalanceModel isOpen={isBalanceModelOpen} setIsOpen={setBalanceModel} />
+      <BalanceModel
+        isOpen={isBalanceModelOpen}
+        setIsOpen={setBalanceModel}
+        balance={balance}
+        setBalance={setBalance}
+      />
     </div>
   );
 }
