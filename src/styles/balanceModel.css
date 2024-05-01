@@ -1,0 +1,20 @@
+.balanceModelContainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  font-family: "Ubuntu", sans-serif;
+}
+.balanceModelContainer h1 {
+  font-weight: 700;
+}
+.balanceModelContainer input,
+.balanceModelContainer button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  box-shadow: 0px 1px 4px black;
+}
+.balanceModelWrapper {
+  display: flex;
+  gap: 20px;
+}

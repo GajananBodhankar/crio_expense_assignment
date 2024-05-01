@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Model from "react-modal";
 import "../styles/model.css";
 import { useSnackbar } from "notistack";
@@ -7,15 +7,25 @@ import {
   initialState,
   reducerFunction,
 } from "../GlobalState/Reducer";
-function CustomModel({ isOpen, setIsOpen }) {
+import Expense from "./Expense";
+function CustomModel({
+  state,
+  dispatch,
+  isOpen,
+  setIsOpen,
+  balance,
+  setBalance,
+  setExpense,
+  expense,
+}) {
   const { enqueueSnackbar } = useSnackbar();
-  const [state, dispatch] = useReducer(reducerFunction, initialState);
   const [data, setData] = useState({
     title: "",
     price: "",
     category: "DEFAULT",
     date: "",
   });
+
   return (
     <Model
       isOpen={isOpen}
@@ -60,9 +70,7 @@ function CustomModel({ isOpen, setIsOpen }) {
               setData((prev) => ({ ...prev, category: e.target.value }))
             }
           >
-            <option value="DEFAULT">
-              Select Category
-            </option>
+            <option value="DEFAULT">Select Category</option>
             <option value="food">Food</option>
             <option value="travel">Travel</option>
             <option value="entertainment">Entertainment</option>
@@ -78,12 +86,36 @@ function CustomModel({ isOpen, setIsOpen }) {
         <div className="buttonContainer">
           <button
             onClick={() =>
-              addExpense(data.category, data, dispatch, state, enqueueSnackbar)
+              addExpense(
+                data.category,
+                data,
+                dispatch,
+                state,
+                enqueueSnackbar,
+                setData,
+                setIsOpen,
+                balance,
+                setBalance,
+                expense,
+                setExpense
+              )
             }
           >
             Add Expense
           </button>
-          <button onClick={() => setIsOpen((prev) => !prev)}>Cancel</button>
+          <button
+            onClick={() => {
+              setIsOpen((prev) => !prev);
+              setData((prev) => ({
+                title: "",
+                price: "",
+                category: "DEFAULT",
+                date: "",
+              }));
+            }}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </Model>

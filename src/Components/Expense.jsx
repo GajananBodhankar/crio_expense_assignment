@@ -1,31 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
 import "../styles/expense.css";
 import CustomModel from "./Model.jsx";
 import { useSnackbar } from "notistack";
-function Expense() {
-  const [isOpen, setIsOpen] = useState(false);
+import {
+  handleGetLocalStorage,
+  initialState,
+  reducerFunction,
+} from "../GlobalState/Reducer.js";
+import PieChartComponent from "./PieChart.jsx";
+import BalanceModel from "./BalanceModel.jsx";
+function Expense({
+  state,
+  dispatch,
+  isOpen,
+  setIsOpen,
+  balance,
+  setBalance,
+  setExpense,
+  expense,
+}) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const [isBalanceModelOpen, setBalanceModel] = useState(false);
+  useEffect(() => {
+    handleGetLocalStorage(setExpense, setBalance, balance, dispatch);
+  }, []);
+
   return (
     <div className="mainExpenseContainer">
       <div className="subContainerOne">
         <h1>Expense Tracker</h1>
         <div className="subOneWrapper">
           <div className="balanceContainer">
-            <p>Wallet Balance: $0000</p>
-            <button>+ Add Income</button>
+            <p>Wallet Balance: ₹{balance}</p>
+            <button onClick={() => setBalanceModel((prev) => !prev)}>
+              + Add Income
+            </button>
           </div>
           <div className="expenseContainer">
-            <p>Expenses: $4500</p>
+            <p>Expenses: ₹{expense}</p>
             <button onClick={() => setIsOpen((prev) => !prev)}>
               + Add Expense
             </button>
           </div>
-          <div className="pieChartContainer"></div>
+          <div className="pieChartContainer">
+            <PieChartComponent
+              state={
+                JSON.parse(localStorage.getItem("data"))
+                  ? JSON.parse(localStorage.getItem("data"))
+                  : state
+              }
+            />
+            <div className="pieIndexInfo">
+              <div>
+                <div className="food"></div>
+                <p>Food</p>
+              </div>
+              <div>
+                <div className="travel"></div>
+                <p>Travel</p>
+              </div>
+              <div>
+                <div className="entertainment"></div>
+                <p>Entertainment</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="subContainerTwo"></div>
       <CustomModel isOpen={isOpen} setIsOpen={setIsOpen} />
+      <BalanceModel isOpen={isBalanceModelOpen} setIsOpen={setBalanceModel} />
     </div>
   );
 }

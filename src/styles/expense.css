@@ -16,10 +16,11 @@
 .subOneWrapper {
   background-color: #626262;
   border-radius: 10px;
-  padding: 30px 50px;
+  padding: 10px 50px 30px 50px;
   margin-top: 10px;
   display: flex;
   gap: 20px;
+  justify-content: space-around;
 }
 .balanceContainer {
   background-color: #9b9b9b;
@@ -31,6 +32,7 @@
   flex-direction: column;
   padding: 35px 30px;
   gap: 10px;
+  align-self: center;
   text-align: center;
   width: 300px;
   box-shadow: 0px 2px 4px 0px black;
@@ -53,6 +55,7 @@
   font-size: 30px;
   border-radius: 10px;
   text-align: center;
+  align-self: center;
 
   display: flex;
   flex-direction: column;
@@ -71,6 +74,41 @@
   font-weight: 700;
   font-size: 1rem;
   padding: 7px 20px;
+}
+.pieChartContainer {
+  display: flex;
+  align-items: center;
+  flex-grow: 0.5;
+  flex-direction: column;
+}
+.pieIndexInfo {
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  gap: 10px;
+}
+.pieIndexInfo > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.entertainment {
+  background-color: #ff9304;
+  height: 10px;
+  width: 20px;
+}
+.travel {
+  background-color: #fde006;
+  height: 10px;
+  width: 20px;
+}
+.food {
+  background-color: #a000ff;
+  height: 10px;
+  width: 20px;
+}
+.recharts-wrapper path {
+  stroke: none !important;
 }
 .subContainerTwo {
 }
