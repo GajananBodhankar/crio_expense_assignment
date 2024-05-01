@@ -113,12 +113,45 @@
 .subContainerTwo {
   font-family: "Ubuntu", sans-serif;
   padding: 12px 20px;
-
+  display: flex;
 }
 .subContainerTwo h1 {
   font-style: italic;
 }
 .recentTransactions {
+  flex-grow: 1;
+}
+.SubRecentTransactions {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
 }
 .topExpenses {
+  flex-grow: 1;
+}
+.subTopExpenses {
+  background-color: white;
+  color: black;
+  padding: 10px 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.subTopExpenses > div {
+  display: flex;
+  gap: 20px;
+}
+.subTopExpenses > div > p {
+  width: 20%;
+  text-align: end;
+}
+.subTopExpenses > div > div {
+  width: 75%;
+}
+.topExpensesChartDiv {
+  background-color: #8784d2;
+  color: #8784d2;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const reducerFunction = (state, action) => {
-    console.log("action", action)
     switch (action.type) {
         case 'food': {
             if (action.bool) {
