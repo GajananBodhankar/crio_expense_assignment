@@ -68,7 +68,12 @@ function Expense({
         </div>
       </div>
 
-      <div className="subContainerTwo"></div>
+      <div className="subContainerTwo">
+        <div className="recentTransactions">
+          <h1>Recent Transactions</h1>
+        </div>
+        <div className="topExpenses"></div>
+      </div>
       <CustomModel isOpen={isOpen} setIsOpen={setIsOpen} />
       <BalanceModel
         isOpen={isBalanceModelOpen}

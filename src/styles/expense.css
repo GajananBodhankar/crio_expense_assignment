@@ -5,13 +5,13 @@
   flex-direction: column;
   color: white;
 }
-.subContainerOne > h1:first-child {
-  font-weight: 700;
-  font-style: normal;
-}
 .subContainerOne {
   font-family: "Ubuntu", sans-serif;
   padding: 12px 20px;
+}
+.subContainerOne > h1:first-child {
+  font-weight: 700;
+  font-style: normal;
 }
 .subOneWrapper {
   background-color: #626262;
@@ -111,4 +111,14 @@
   stroke: none !important;
 }
 .subContainerTwo {
+  font-family: "Ubuntu", sans-serif;
+  padding: 12px 20px;
+
+}
+.subContainerTwo h1 {
+  font-style: italic;
+}
+.recentTransactions {
+}
+.topExpenses {
 }
