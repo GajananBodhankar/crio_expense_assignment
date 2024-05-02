@@ -32,7 +32,6 @@ const reducerFunction = (state, action) => {
         }
         case 'travel': {
             if (action.bool) {
-
                 localStorage.setItem("data", JSON.stringify({
                     ...state,
                     travel: [...state.travel, action.payload]
@@ -41,6 +40,36 @@ const reducerFunction = (state, action) => {
             return {
                 ...state,
                 travel: [...state.travel, action.payload]
+            }
+        }
+        case 'deleteFood': {
+            localStorage.setItem('data', JSON.stringify({
+                ...state,
+                food: [...action.payload]
+            }))
+            return {
+                ...state,
+                food: [...action.payload]
+            }
+        }
+        case 'deleteTravel': {
+            localStorage.setItem('data', JSON.stringify({
+                ...state,
+                travel: [...action.payload]
+            }))
+            return {
+                ...state,
+                travel: [...action.payload]
+            }
+        }
+        case 'deleteEntertainment': {
+            localStorage.setItem('data', JSON.stringify({
+                ...state,
+                entertainment: [...action.payload]
+            }))
+            return {
+                ...state,
+                entertainment: [...action.payload]
             }
         }
         default:
@@ -128,10 +157,45 @@ function handleAddBalance(balance, value, setBalance, enqueueSnackbar, setIsOpen
     }
 }
 
+function handleDelete(ele, state, dispatch, setBalance, balance, setExpense, expense) {
+    let result = [...state[ele.category]]
+    console.log(result)
+    let ind = result.findIndex(i => i.title === ele.title && i.date === ele.date)
+    let deletedItem = result.splice(ind, 1)
+    switch (ele.category) {
+        case 'food': {
+            dispatch({
+                type: 'deleteFood',
+                payload: result
+            })
+            break
+        }
+        case 'travel': {
+            dispatch({
+                type: 'deleteTravel',
+                payload: result
+            })
+            break;
+        }
+        case 'entertainment': {
+            dispatch({
+                type: 'deleteEntertainment',
+                payload: result
+            })
+            break
+        }
+    }
+    setBalance(+balance + parseInt(deletedItem[0].price))
+    setExpense(+expense - parseInt(deletedItem[0].price))
+    localStorage.setItem('balance', balance + parseInt(deletedItem[0].price))
+    console.log(deletedItem)
+}
+
 export {
     initialState,
     reducerFunction,
     addExpense,
     handleGetLocalStorage,
-    handleAddBalance
+    handleAddBalance,
+    handleDelete
 }

@@ -3,12 +3,15 @@ import "../styles/expense.css";
 import CustomModel from "./Model.jsx";
 import { useSnackbar } from "notistack";
 import {
+  handleDelete,
   handleGetLocalStorage,
   initialState,
   reducerFunction,
 } from "../GlobalState/Reducer.js";
 import PieChartComponent from "./PieChart.jsx";
 import BalanceModel from "./BalanceModel.jsx";
+import { RxCrossCircled } from "react-icons/rx";
+import { MdOutlineEdit } from "react-icons/md";
 function Expense({
   state,
   dispatch,
@@ -117,7 +120,24 @@ function Expense({
             {Object.values(state).map((i) => {
               if (i.length > 0) {
                 return i.map((ele, ind) => (
-                  <p key={`Element ${ind}`}>{ele.title}</p>
+                  <div key={`Element ${ind}`}>
+                    <p>{ele.title}</p>
+                    <p>{ele.price}</p>
+                    <RxCrossCircled
+                      onClick={() =>
+                        handleDelete(
+                          ele,
+                          state,
+                          dispatch,
+                          setBalance,
+                          balance,
+                          setExpense,
+                          expense
+                        )
+                      }
+                    />
+                    <MdOutlineEdit />
+                  </div>
                 ));
               }
               return null;
@@ -128,8 +148,8 @@ function Expense({
           <h1>Top Expenses</h1>
           <div className="subTopExpenses">
             {chartData.map((i, j) => (
-              <div>
-                <p key={j}>{i.name}</p>
+              <div key={j}>
+                <p>{i.name}</p>
                 <div>
                   <div
                     className="topExpensesChartDiv"
@@ -141,7 +161,16 @@ function Expense({
                             chartData[1].value,
                             chartData[2].value
                           )) *
-                        100
+                          100 >
+                        0
+                          ? (i.value /
+                              Math.max(
+                                chartData[0].value,
+                                chartData[1].value,
+                                chartData[2].value
+                              )) *
+                            100
+                          : 0
                       }%`,
                     }}
                   >

@@ -126,6 +126,9 @@
   border-radius: 10px;
   color: black;
 }
+.SubRecentTransactions > div {
+  display: flex;
+}
 .topExpenses {
   flex-grow: 1;
 }
