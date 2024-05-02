@@ -159,7 +159,6 @@ function handleAddBalance(balance, value, setBalance, enqueueSnackbar, setIsOpen
 
 function handleDelete(ele, state, dispatch, setBalance, balance, setExpense, expense) {
     let result = [...state[ele.category]]
-    console.log(result)
     let ind = result.findIndex(i => i.title === ele.title && i.date === ele.date && i.price === ele.price)
     let deletedItem = result.splice(ind, 1)
     switch (ele.category) {
@@ -188,7 +187,6 @@ function handleDelete(ele, state, dispatch, setBalance, balance, setExpense, exp
     setBalance(+balance + parseInt(deletedItem[0].price))
     setExpense(+expense - parseInt(deletedItem[0].price))
     localStorage.setItem('balance', balance + parseInt(deletedItem[0].price))
-    console.log(deletedItem)
 }
 
 function getTotalItemsLength(state) {
@@ -257,7 +255,6 @@ function editExpense(type,
     expense,
     setExpense, expenseData) {
     let result = [...state[type]]
-    console.log(result)
     let editIndex = result.findIndex(i => i.title === expenseData.title && i.date === expenseData.date && i.price === expenseData.price)
     result.splice(editIndex, 1, data)
     switch (type) {
