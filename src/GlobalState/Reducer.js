@@ -214,6 +214,25 @@ function getTotalItemsList(state) {
     })
     return result
 }
+
+function handleIncrement(setCount) {
+    setCount((prev) => {
+        if (prev - 3 <= 0) {
+            return prev;
+        }
+        return prev - 3;
+    });
+
+}
+
+function handleDecrement(setCount, maxCount) {
+    setCount((prev) => {
+        if (prev == Math.floor(maxCount / 3)) {
+            return prev;
+        }
+        return prev + 3;
+    });
+}
 export {
     initialState,
     reducerFunction,
@@ -222,5 +241,7 @@ export {
     handleAddBalance,
     handleDelete,
     getTotalItemsLength,
-    getTotalItemsList
+    getTotalItemsList,
+    handleIncrement,
+    handleDecrement
 }

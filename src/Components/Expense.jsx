@@ -12,9 +12,10 @@ import {
 } from "../GlobalState/Reducer.js";
 import PieChartComponent from "./PieChart.jsx";
 import BalanceModel from "./BalanceModel.jsx";
-import { RxCrossCircled } from "react-icons/rx";
-import { MdOutlineEdit } from "react-icons/md";
+
 import TopExpensesChart from "./TopExpensesChart.jsx";
+import Recent from "./Recent.jsx";
+import Pagination from "./Pagination.jsx";
 function Expense({
   state,
   dispatch,
@@ -126,58 +127,8 @@ function Expense({
         <div className="recentTransactions">
           <h1>Recent Transactions</h1>
           <div className="SubRecentTransactions">
-            {totalElementsList.map(
-              (ele, ind) =>
-                ind < count &&
-                ind > count - 4 * 1 && (
-                  <div key={`Element ${ind}`}>
-                    <p>{ele.title}</p>
-                    <p>{ele.price}</p>
-                    <RxCrossCircled
-                      onClick={() =>
-                        handleDelete(
-                          ele,
-                          state,
-                          dispatch,
-                          setBalance,
-                          balance,
-                          setExpense,
-                          expense
-                        )
-                      }
-                    />
-                    <MdOutlineEdit />
-                  </div>
-                )
-            )}
-
-            <div>
-              <button
-                onClick={() => {
-                  setCount((prev) => {
-                    if (prev - 3 <= 0) {
-                      return prev;
-                    }
-                    return prev - 3;
-                  });
-                }}
-              >
-                -
-              </button>
-              <p>{count / 3}</p>
-              <button
-                onClick={() => {
-                  setCount((prev) => {
-                    if (prev == Math.floor(maxCount / 3)) {
-                      return prev;
-                    }
-                    return prev + 3;
-                  });
-                }}
-              >
-                +
-              </button>
-            </div>
+            <Recent totalElementsList={totalElementsList} count={count} />
+            <Pagination count={count} setCount={setCount} maxCount={maxCount} />
           </div>
         </div>
         <div className="topExpenses">
