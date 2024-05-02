@@ -191,11 +191,36 @@ function handleDelete(ele, state, dispatch, setBalance, balance, setExpense, exp
     console.log(deletedItem)
 }
 
+function getTotalItemsLength(state) {
+    let result = 0;
+    Object.values(state).forEach(i => {
+        if (i.length) {
+            i.forEach(ele => {
+                result += 1
+            })
+        }
+    })
+    return result
+}
+
+function getTotalItemsList(state) {
+    let result = [];
+    Object.values(state).forEach(i => {
+        if (i.length) {
+            i.forEach(ele => {
+                result.push(ele)
+            })
+        }
+    })
+    return result
+}
 export {
     initialState,
     reducerFunction,
     addExpense,
     handleGetLocalStorage,
     handleAddBalance,
-    handleDelete
+    handleDelete,
+    getTotalItemsLength,
+    getTotalItemsList
 }

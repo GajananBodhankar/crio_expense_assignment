@@ -3,6 +3,8 @@ import "../styles/expense.css";
 import CustomModel from "./Model.jsx";
 import { useSnackbar } from "notistack";
 import {
+  getTotalItemsLength,
+  getTotalItemsList,
   handleDelete,
   handleGetLocalStorage,
   initialState,
@@ -12,6 +14,7 @@ import PieChartComponent from "./PieChart.jsx";
 import BalanceModel from "./BalanceModel.jsx";
 import { RxCrossCircled } from "react-icons/rx";
 import { MdOutlineEdit } from "react-icons/md";
+import TopExpensesChart from "./TopExpensesChart.jsx";
 function Expense({
   state,
   dispatch,
@@ -24,6 +27,9 @@ function Expense({
 }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [isBalanceModelOpen, setBalanceModel] = useState(false);
+  const [count, setCount] = useState(3);
+  const [maxCount, setMaxCount] = useState(0);
+  const [totalElementsList, setTotalElements] = useState([]);
   const [chartData, setChartData] = useState([
     {
       name: "Food",
@@ -69,6 +75,9 @@ function Expense({
       },
     ]);
     setChartData((prev) => prev.sort((a, b) => b.value - a.value));
+    setMaxCount(getTotalItemsLength(state));
+    setTotalElements([...getTotalItemsList(state)]);
+    console.log(totalElementsList);
   }, [state]);
   return (
     <div className="mainExpenseContainer">
@@ -117,9 +126,10 @@ function Expense({
         <div className="recentTransactions">
           <h1>Recent Transactions</h1>
           <div className="SubRecentTransactions">
-            {Object.values(state).map((i) => {
-              if (i.length > 0) {
-                return i.map((ele, ind) => (
+            {totalElementsList.map(
+              (ele, ind) =>
+                ind < count &&
+                ind > count - 4 * 1 && (
                   <div key={`Element ${ind}`}>
                     <p>{ele.title}</p>
                     <p>{ele.price}</p>
@@ -138,47 +148,42 @@ function Expense({
                     />
                     <MdOutlineEdit />
                   </div>
-                ));
-              }
-              return null;
-            })}
+                )
+            )}
+
+            <div>
+              <button
+                onClick={() => {
+                  setCount((prev) => {
+                    if (prev - 3 <= 0) {
+                      return prev;
+                    }
+                    return prev - 3;
+                  });
+                }}
+              >
+                -
+              </button>
+              <p>{count / 3}</p>
+              <button
+                onClick={() => {
+                  setCount((prev) => {
+                    if (prev == Math.floor(maxCount / 3)) {
+                      return prev;
+                    }
+                    return prev + 3;
+                  });
+                }}
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
         <div className="topExpenses">
           <h1>Top Expenses</h1>
           <div className="subTopExpenses">
-            {chartData.map((i, j) => (
-              <div key={j}>
-                <p>{i.name}</p>
-                <div>
-                  <div
-                    className="topExpensesChartDiv"
-                    style={{
-                      width: `${
-                        (i.value /
-                          Math.max(
-                            chartData[0].value,
-                            chartData[1].value,
-                            chartData[2].value
-                          )) *
-                          100 >
-                        0
-                          ? (i.value /
-                              Math.max(
-                                chartData[0].value,
-                                chartData[1].value,
-                                chartData[2].value
-                              )) *
-                            100
-                          : 0
-                      }%`,
-                    }}
-                  >
-                    .
-                  </div>
-                </div>
-              </div>
-            ))}
+            <TopExpensesChart chartData={chartData} />
           </div>
         </div>
       </div>
