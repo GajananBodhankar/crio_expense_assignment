@@ -70,4 +70,7 @@
   .buttonContainer {
     flex-direction: column;
   }
+  .inputContainerTwo input {
+    width: auto;
+  }
 }
