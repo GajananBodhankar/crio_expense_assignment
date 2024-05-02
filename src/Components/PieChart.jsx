@@ -50,10 +50,10 @@ function PieChartComponent({ state }) {
       </text>
     );
   };
-  useEffect(() => {
-    // console.log("pie", state, data);
-  });
-  return (
+
+  return state.food.length &&
+    state.travel.length &&
+    state.entertainment.length ? (
     <PieChart width={170} height={180}>
       <Pie
         data={data}
@@ -74,6 +74,10 @@ function PieChartComponent({ state }) {
         ))}
       </Pie>
     </PieChart>
+  ) : (
+    <div style={{ height: "180px", display: "flex", alignItems: "center" }}>
+      <p>Add expense to plot pie chart</p>
+    </div>
   );
 }
 
