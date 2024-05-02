@@ -215,7 +215,7 @@ function getTotalItemsList(state) {
     return result
 }
 
-function handleIncrement(setCount) {
+function handleDecrement(setCount) {
     setCount((prev) => {
         if (prev - 3 <= 0) {
             return prev;
@@ -225,13 +225,17 @@ function handleIncrement(setCount) {
 
 }
 
-function handleDecrement(setCount, maxCount) {
+function handleIncrement(setCount, maxCount) {
     setCount((prev) => {
-        if (prev == Math.floor(maxCount / 3)) {
+        if (prev >= Math.floor(maxCount)) {
             return prev;
         }
         return prev + 3;
     });
+}
+
+function handleEdit() {
+
 }
 export {
     initialState,
@@ -243,5 +247,6 @@ export {
     getTotalItemsLength,
     getTotalItemsList,
     handleIncrement,
-    handleDecrement
+    handleDecrement,
+    handleEdit
 }

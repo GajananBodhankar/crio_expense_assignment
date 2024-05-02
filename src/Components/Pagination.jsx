@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { handleDecrement, handleIncrement } from "../GlobalState/Reducer";
 
 function Pagination({ count, setCount, maxCount }) {
+  useEffect(() => {
+    console.log(maxCount, count);
+  });
   return (
     <div>
-      <button onClick={() => handleIncrement(setCount)}>-</button>
+      <button onClick={() => handleDecrement(setCount)}>-</button>
       <p>{count / 3}</p>
-      <button onClick={() => handleDecrement(setCount, maxCount)}>+</button>
+      <button onClick={() => handleIncrement(setCount, maxCount)}>+</button>
     </div>
   );
 }

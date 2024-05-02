@@ -78,7 +78,7 @@ function Expense({
     setChartData((prev) => prev.sort((a, b) => b.value - a.value));
     setMaxCount(getTotalItemsLength(state));
     setTotalElements([...getTotalItemsList(state)]);
-    console.log(totalElementsList);
+    console.log(totalElementsList, maxCount);
   }, [state]);
   return (
     <div className="mainExpenseContainer">
@@ -127,7 +127,16 @@ function Expense({
         <div className="recentTransactions">
           <h1>Recent Transactions</h1>
           <div className="SubRecentTransactions">
-            <Recent totalElementsList={totalElementsList} count={count} />
+            <Recent
+              totalElementsList={totalElementsList}
+              count={count}
+              state={state}
+              dispatch={dispatch}
+              balance={balance}
+              setBalance={setBalance}
+              setExpense={setExpense}
+              expense={expense}
+            />
             <Pagination count={count} setCount={setCount} maxCount={maxCount} />
           </div>
         </div>

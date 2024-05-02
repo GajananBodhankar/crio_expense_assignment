@@ -1,7 +1,17 @@
 import React from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import { MdOutlineEdit } from "react-icons/md";
-function Recent({ totalElementsList, count }) {
+import { handleDelete, handleEdit } from "../GlobalState/Reducer";
+function Recent({
+  totalElementsList,
+  count,
+  state,
+  dispatch,
+  setBalance,
+  balance,
+  setExpense,
+  expense,
+}) {
   return totalElementsList.map(
     (ele, ind) =>
       ind < count &&
@@ -22,7 +32,11 @@ function Recent({ totalElementsList, count }) {
               )
             }
           />
-          <MdOutlineEdit />
+          <MdOutlineEdit
+            onClick={() => {
+              handleEdit();
+            }}
+          />
         </div>
       )
   );
