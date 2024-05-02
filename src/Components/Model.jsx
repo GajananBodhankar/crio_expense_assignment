@@ -88,7 +88,7 @@ function CustomModel({
             <option value="entertainment">Entertainment</option>
           </select>
           <input
-            type="date"
+            type="text"
             value={data.date}
             onChange={(e) =>
               setData((prev) => ({ ...prev, date: e.target.value }))
