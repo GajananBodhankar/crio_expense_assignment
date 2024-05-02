@@ -4,6 +4,7 @@ import "../styles/model.css";
 import { useSnackbar } from "notistack";
 import {
   addExpense,
+  editExpense,
   initialState,
   reducerFunction,
 } from "../GlobalState/Reducer";
@@ -17,6 +18,8 @@ function CustomModel({
   setBalance,
   setExpense,
   expense,
+  isAddExpense,
+  expenseData = { title: "", price: "", category: "DEFAULT", date: "" },
 }) {
   const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState({
@@ -25,7 +28,11 @@ function CustomModel({
     category: "DEFAULT",
     date: "",
   });
-
+  useEffect(() => {
+    if (!isAddExpense) {
+      setData({ ...expenseData });
+    }
+  }, [isOpen]);
   return (
     <Model
       isOpen={isOpen}
@@ -42,7 +49,12 @@ function CustomModel({
       }}
     >
       <div className="modelContainer">
-        <h1>Add Expenses</h1>
+        {isAddExpense == true || isAddExpense == undefined ? (
+          <h1>Add Expenses</h1>
+        ) : (
+          <h1>Edit Expense</h1>
+        )}
+
         <div className="inputContainerOne">
           <input
             type="text"
@@ -85,23 +97,42 @@ function CustomModel({
         </div>
         <div className="buttonContainer">
           <button
-            onClick={() =>
-              addExpense(
-                data.category,
-                data,
-                dispatch,
-                state,
-                enqueueSnackbar,
-                setData,
-                setIsOpen,
-                balance,
-                setBalance,
-                expense,
-                setExpense
-              )
-            }
+            onClick={() => {
+              if (isAddExpense || isAddExpense == undefined) {
+                addExpense(
+                  data.category,
+                  data,
+                  dispatch,
+                  state,
+                  enqueueSnackbar,
+                  setData,
+                  setIsOpen,
+                  balance,
+                  setBalance,
+                  expense,
+                  setExpense
+                );
+              } else {
+                editExpense(
+                  data.category,
+                  data,
+                  dispatch,
+                  state,
+                  enqueueSnackbar,
+                  setData,
+                  setIsOpen,
+                  balance,
+                  setBalance,
+                  expense,
+                  setExpense,
+                  expenseData
+                );
+              }
+            }}
           >
-            Add Expense
+            {isAddExpense == true || isAddExpense == undefined
+              ? "Add Expenses"
+              : "Edit Expenses"}
           </button>
           <button
             onClick={() => {

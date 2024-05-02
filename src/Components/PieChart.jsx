@@ -23,7 +23,6 @@ function PieChartComponent({ state }) {
         : 0,
     },
   ];
-
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -51,9 +50,7 @@ function PieChartComponent({ state }) {
     );
   };
 
-  return state.food.length &&
-    state.travel.length &&
-    state.entertainment.length ? (
+  return data[0].value || data[1].value || data[2].value ? (
     <PieChart width={170} height={180}>
       <Pie
         data={data}

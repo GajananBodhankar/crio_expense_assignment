@@ -151,7 +151,7 @@ function handleAddBalance(balance, value, setBalance, enqueueSnackbar, setIsOpen
             variant: "error",
         })
     } else {
-        setBalance(balance + parseInt(value))
+        setBalance(parseInt(balance) + parseInt(value))
         localStorage.setItem('balance', balance + parseInt(value))
         setIsOpen(prev => !prev)
     }
@@ -160,7 +160,7 @@ function handleAddBalance(balance, value, setBalance, enqueueSnackbar, setIsOpen
 function handleDelete(ele, state, dispatch, setBalance, balance, setExpense, expense) {
     let result = [...state[ele.category]]
     console.log(result)
-    let ind = result.findIndex(i => i.title === ele.title && i.date === ele.date)
+    let ind = result.findIndex(i => i.title === ele.title && i.date === ele.date && i.price === ele.price)
     let deletedItem = result.splice(ind, 1)
     switch (ele.category) {
         case 'food': {
@@ -234,8 +234,83 @@ function handleIncrement(setCount, maxCount) {
     });
 }
 
-function handleEdit() {
+function handleEdit(state,
+    dispatch,
+    isOpen,
+    setIsOpen,
+    balance,
+    setBalance,
+    setExpense,
+    expense, ) {
+    setIsOpen(prev => !prev)
+}
 
+function editExpense(type,
+    data,
+    dispatch,
+    state,
+    enqueueSnackbar,
+    setData,
+    setIsOpen,
+    balance,
+    setBalance,
+    expense,
+    setExpense, expenseData) {
+    let result = [...state[type]]
+    console.log(result)
+    let editIndex = result.findIndex(i => i.title === expenseData.title && i.date === expenseData.date && i.price === expenseData.price)
+    result.splice(editIndex, 1, data)
+    switch (type) {
+        case 'food': {
+            dispatch({
+                type: 'deleteFood',
+                payload: result
+            })
+            break
+        }
+        case 'travel': {
+            dispatch({
+                type: 'deleteTravel',
+                payload: result
+            })
+            break;
+        }
+        case 'entertainment': {
+            dispatch({
+                type: 'deleteEntertainment',
+                payload: result
+            })
+            break
+        }
+    }
+    if (expenseData.price > data.price) {
+        setBalance(+balance + (expenseData.price - data.price))
+        localStorage.setItem('balance', +balance + (expenseData.price - data.price))
+        setExpense(+expense - (expenseData.price - data.price))
+    } else if (expenseData.price < data.price) {
+        setBalance(+balance - (data.price - expenseData.price))
+        localStorage.setItem('balance', +balance + (expenseData.price - data.price))
+        setExpense(+expense + (data.price - expenseData.price))
+    }
+}
+const dateObj = {
+    '01': 'Jan',
+    '02': 'Feb',
+    '03': 'Mar',
+    '04': 'Apr',
+    '05': 'May',
+    '06': 'Jun',
+    '07': 'Jul',
+    '08': 'Aug',
+    '09': 'Sep',
+    '10': 'Oct',
+    '11': 'Nov',
+    '12': 'Dec'
+};
+
+function convertDate(date) {
+    let result = date.split(/-/)
+    return `${dateObj[result[1]]} ${result[2]}, ${result[0]}`
 }
 export {
     initialState,
@@ -248,5 +323,7 @@ export {
     getTotalItemsList,
     handleIncrement,
     handleDecrement,
-    handleEdit
+    handleEdit,
+    editExpense,
+    convertDate
 }

@@ -78,7 +78,6 @@ function Expense({
     setChartData((prev) => prev.sort((a, b) => b.value - a.value));
     setMaxCount(getTotalItemsLength(state));
     setTotalElements([...getTotalItemsList(state)]);
-    console.log(totalElementsList, maxCount);
   }, [state]);
   return (
     <div className="mainExpenseContainer">
@@ -122,7 +121,6 @@ function Expense({
           </div>
         </div>
       </div>
-
       <div className="subContainerTwo">
         <div className="recentTransactions">
           <h1>Recent Transactions</h1>
@@ -147,7 +145,17 @@ function Expense({
           </div>
         </div>
       </div>
-      <CustomModel isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CustomModel
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        setBalance={setBalance}
+        setExpense={setExpense}
+        expense={expense}
+        balance={balance}
+        state={state}
+        dispatch={dispatch}
+        isAddExpense={true}
+      />
       <BalanceModel
         isOpen={isBalanceModelOpen}
         setIsOpen={setBalanceModel}
