@@ -6,6 +6,7 @@
 .inputContainerTwo {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .inputContainerTwo select {
   flex-grow: 0.9;
@@ -38,12 +39,13 @@
 .buttonContainer {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .buttonContainer button:first-child {
   font-family: sans-serif;
   font-size: 14px;
   background-color: #f4bb4a;
-  flex-grow: 0.43;
+  flex-grow: 0.4;
   color: white;
   font-weight: 700;
   border: none;
@@ -55,4 +57,16 @@
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
+}
+
+@media screen and (max-width: 450px) {
+  .inputContainerOne {
+    flex-direction: column;
+  }
+  .inputContainerTwo {
+    flex-direction: column;
+  }
+  .buttonContainer {
+    flex-direction: column;
+  }
 }
