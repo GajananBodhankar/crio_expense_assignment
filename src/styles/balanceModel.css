@@ -38,3 +38,16 @@
   font-size: 12px;
   padding: 0px 22px;
 }
+@media screen and (max-width: 490px) {
+  .balanceModelWrapper {
+    flex-direction: column;
+  }
+  .balanceModelWrapper button:nth-child(2) {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .balanceModelWrapper button:nth-child(3){
+    padding: 10px;
+    font-size: 14px;
+  } 
+}
